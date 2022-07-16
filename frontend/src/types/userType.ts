@@ -1,3 +1,14 @@
+interface Image {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  destination: string;
+  filename: string;
+  path: string;
+  size: number;
+}
+
 export interface User {
   id: number;
   email: string;
@@ -5,7 +16,7 @@ export interface User {
   phone: string | null;
   address: string | null;
   companyName: string | null;
-  profileImage: string | null;
+  profileImage: Image | null;
   isActive: boolean;
   isVerified: boolean;
   createdAt: Date;

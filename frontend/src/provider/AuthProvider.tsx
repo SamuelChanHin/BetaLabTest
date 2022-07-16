@@ -1,11 +1,14 @@
-import React, { PropsWithChildren } from "react";
+import React, { Dispatch, PropsWithChildren } from "react";
+import { User } from "../types/userType";
 
 interface AuthContextProps {
   isAuthenticated: boolean;
+  setIsAuthenticated: Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const AuthContext = React.createContext<AuthContextProps>({
   isAuthenticated: false,
+  setIsAuthenticated: () => undefined,
 });
 export const useAuth = () => React.useContext(AuthContext);
 
@@ -24,7 +27,7 @@ export const AuthProvider = ({
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated }}>
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
