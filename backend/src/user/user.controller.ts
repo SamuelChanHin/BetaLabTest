@@ -7,10 +7,15 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { User } from 'src/model/user.model';
 import { hashCode } from 'src/util/hash';
 import { FriendStatus } from 'src/model/friend.model';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { profileImageStore } from 'src/config/fileUploadStore';
+import { Public } from 'src/auth/constant';
 
 @Controller('/user')
 export class UserController {
@@ -37,14 +42,20 @@ export class UserController {
     return friends;
   }
 
+  @Public()
   @Post('/')
-  async createUser(@Body() userData: Partial<User>) {
+  @UseInterceptors(FileInterceptor('image', profileImageStore))
+  async createUser(
+    @Body() userData: Partial<User>,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
     const { password } = userData;
     const hashedPassword = await hashCode(password);
 
     const user = await this.userService.create({
       ...userData,
       password: hashedPassword,
+      profileImage: file,
     });
     return user;
   }

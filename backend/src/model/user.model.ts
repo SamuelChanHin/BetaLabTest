@@ -8,6 +8,16 @@ import {
 } from 'typeorm';
 import { Friend } from './friend.model';
 
+interface Image {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  destination: string;
+  filename: string;
+  path: string;
+  size: number;
+}
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -31,8 +41,8 @@ export class User {
   @Column({ name: 'company_name', nullable: true })
   companyName: string;
 
-  @Column({ name: 'profile_image_url', nullable: true })
-  profileImageUrl: string;
+  @Column({ type: 'json', name: 'profile_image', nullable: true })
+  profileImage: Image;
 
   @Column({ name: 'is_active', default: true, nullable: false })
   isActive: boolean;
