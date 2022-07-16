@@ -45,6 +45,9 @@ export class User {
   @Column({ type: 'json', name: 'profile_image', nullable: true })
   profileImage: Image;
 
+  @Column({ name: 'is_verified', default: false, nullable: false })
+  isVerified: boolean;
+
   @Column({ name: 'is_active', default: true, nullable: false })
   isActive: boolean;
 

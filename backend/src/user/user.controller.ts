@@ -56,6 +56,7 @@ export class UserController {
       ...userData,
       password: hashedPassword,
       profileImage: file,
+      isVerified: true, // ! now dont have email verification feature so just assume all are real user
     });
     return user;
   }
