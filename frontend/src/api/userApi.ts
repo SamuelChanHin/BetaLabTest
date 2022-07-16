@@ -1,20 +1,22 @@
 import { apiClient } from "../config/apiClient";
-import { User } from "../types/userType";
+import { Friend, User } from "../types/userType";
 
 export const getAllUsersApi = async (): Promise<User[]> => {
-  return await apiClient.get("/user");
+  return (await apiClient.get("/user")).data;
 };
 
-export const getOneUserApi = async (userId: number) => {
-  return await apiClient.get(`/user/${userId}`);
+export const getOneUserApi = async (userId: number): Promise<User> => {
+  return (await apiClient.get(`/user/${userId}`)).data;
 };
 
-export const getAllFriendsApi = async (userId: number) => {
-  return await apiClient.get(`/user/${userId}/friend`);
+export const getAllFriendsApi = async (userId: number): Promise<Friend[]> => {
+  return await (
+    await apiClient.get(`/user/${userId}/friend`)
+  ).data;
 };
 
-export const createUserApi = async (data: User) => {
-  return await apiClient.post("/user", data);
+export const createUserApi = async (data: User): Promise<User> => {
+  return (await apiClient.post("/user", data)).data;
 };
 
 export const addFriendApi = async (
@@ -22,6 +24,6 @@ export const addFriendApi = async (
   data: {
     responderUserId: number;
   }
-) => {
-  return await apiClient.post(`/user/${requesterUserId}/friend`, data);
+): Promise<Friend> => {
+  return (await apiClient.post(`/user/${requesterUserId}/friend`, data)).data;
 };

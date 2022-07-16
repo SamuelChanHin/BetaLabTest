@@ -1,9 +1,20 @@
 import { apiClient } from "../config/apiClient";
+import { User } from "../types/userType";
 
-export const loginApi = async (email: string, password: string) => {
-  return await apiClient.post("/auth/login");
+export const loginApi = async (data: {
+  email: string;
+  password: string;
+}): Promise<User & { access_token: string }> => {
+  return (
+    await apiClient.post("/auth/login", {
+      username: data.email,
+      password: data.password,
+    })
+  ).data;
 };
 
-export const tokenValidationApi = async () => {
-  return await apiClient.post("/auth/token/validate");
+export const tokenValidationApi = async (): Promise<
+  User & { access_token: string }
+> => {
+  return (await apiClient.post("/auth/token/validate")).data;
 };

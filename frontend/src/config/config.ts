@@ -1,3 +1,3 @@
 export const config = {
-  baseUrl: process.env.REACT_APP_SERVER_BASE_URL || "",
+  baseUrl: process.env.REACT_APP_BASE_API_URL || "",
 };

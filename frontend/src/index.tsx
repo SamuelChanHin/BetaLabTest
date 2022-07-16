@@ -5,6 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./provider/AuthProvider";
 import { ReactQueryProvider } from "./provider/ReactQueryProvider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -14,6 +16,7 @@ root.render(
     <ReactQueryProvider>
       <AuthProvider>
         <App />
+        <ToastContainer />
       </AuthProvider>
     </ReactQueryProvider>
   </React.StrictMode>
