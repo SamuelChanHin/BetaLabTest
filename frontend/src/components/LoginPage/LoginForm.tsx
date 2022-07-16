@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { loginApi } from "../../api/authApi";
 import { toast } from "react-toastify";
 import { setAccessToken } from "../../util/localStoage";
+import { handleEmailValidation } from "../../util/dataValidator";
+import { useAuth } from "../../provider/AuthProvider";
 
 interface LoginData {
   email: string;
@@ -11,6 +13,7 @@ interface LoginData {
 }
 
 function LoginForm() {
+  const { setIsAuthenticated } = useAuth();
   const {
     register,
     handleSubmit,
@@ -21,6 +24,7 @@ function LoginForm() {
     try {
       const res = await loginApi(data);
       setAccessToken(res.access_token);
+      setIsAuthenticated(true);
       toast.success("login success");
     } catch (err) {
       console.error(err);
@@ -35,7 +39,10 @@ function LoginForm() {
           type="text"
           label="email"
           variant="outlined"
-          {...register("email", { required: true })}
+          {...register("email", {
+            required: { value: true, message: "Email can not be empty" },
+            validate: handleEmailValidation,
+          })}
         />
         <Typography variant="body2" style={{ color: "red" }}>
           {errors.email && "email is required"}
@@ -45,7 +52,9 @@ function LoginForm() {
           type="password"
           label="password"
           variant="outlined"
-          {...register("password", { required: true })}
+          {...register("password", {
+            required: { value: true, message: "Password can not be empty" },
+          })}
         />
         <Typography variant="body2" style={{ color: "red" }}>
           {errors.password && "password is required"}

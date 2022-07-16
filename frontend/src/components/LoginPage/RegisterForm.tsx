@@ -1,6 +1,13 @@
-import { Avatar, Button, Stack, TextField, Typography } from "@mui/material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { createUserApi } from "../../api/userApi";
+import { User } from "../../types/userType";
+import { convertObjectToFormData } from "../../util/dataConvertor";
+import { handleEmailValidation } from "../../util/dataValidator";
+import AvatarImageUpload from "../Common/AvatarImageUpload";
+import { toast } from "react-toastify";
+import { refreshPage } from "../../util/window";
 
 interface RegisterData {
   email: string;
@@ -12,37 +19,55 @@ interface RegisterData {
 }
 
 function RegisterForm() {
+  const [profileImageFile, setProfileImageFile] = React.useState(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterData>();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: any) => {
+    try {
+      const formData = convertObjectToFormData(data);
+      if (profileImageFile) {
+        formData.append("image", profileImageFile);
+      }
+
+      await createUserApi(formData as any as User);
+      toast.success("Successfully create new user");
+      refreshPage();
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to register");
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack style={{ width: "100%" }} spacing={1} alignItems="center">
-        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        <AvatarImageUpload size="100px" setImageFile={setProfileImageFile} />
         <TextField
           type="text"
           label="email"
           variant="outlined"
-          {...register("email", { required: true })}
+          {...register("email", {
+            required: { value: true, message: "Email can not be empty" },
+            validate: handleEmailValidation,
+          })}
         />
         <Typography variant="body2" style={{ color: "red" }}>
-          {errors.email && "email is required"}
+          {errors.email && errors.email.message}
         </Typography>
         <TextField
-          type="text"
+          type="password"
           label="password"
           variant="outlined"
-          {...register("password", { required: true })}
+          {...register("password", {
+            required: { value: true, message: "Password can not be empty" },
+          })}
         />
         <Typography variant="body2" style={{ color: "red" }}>
-          {errors.password && "password is required"}
+          {errors.password && errors.password.message}
         </Typography>
         <TextField
           type="text"

@@ -1,4 +1,4 @@
-import { Box, Button, Stack, styled, Typography } from "@mui/material";
+import { Button, Stack, styled, Typography } from "@mui/material";
 import React from "react";
 import LoginForm from "../components/LoginPage/LoginForm";
 import RegisterForm from "../components/LoginPage/RegisterForm";
@@ -12,6 +12,8 @@ function LoginPage() {
 
   return (
     <StackContainer spacing={2} alignItems="center">
+      <Typography variant="h1">Login Page</Typography>
+
       {isRegisterForm ? <RegisterForm /> : <LoginForm />}
       <Button variant="text" onClick={formSwitcher}>
         {isRegisterForm ? "Already have an account?" : "Create an account?"}
