@@ -1,3 +1,4 @@
+import { Friend } from './../model/friend.model';
 import { FriendService } from './../service/friend.service';
 import { UserService } from './../service/user.service';
 import {
@@ -7,6 +8,7 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Req,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -31,9 +33,22 @@ export class UserController {
   }
 
   @Get('/:user_id')
-  async getUserById(@Param('user_id', ParseIntPipe) user_id: number) {
-    const users = await this.userService.findOne(user_id);
-    return users;
+  async getUserById(
+    @Req() req,
+    @Param('user_id', ParseIntPipe) user_id: number,
+  ): Promise<User & { friend: Friend }> {
+    const id = req.user.id; // login user
+    const user = await this.userService.findOne(user_id); // viewing user
+    const friend = await this.friendService.checkFriendshipDuplication(
+      id,
+      user_id,
+    );
+
+    console.log(friend);
+    return {
+      ...user,
+      friend,
+    };
   }
 
   @Get('/:user_id/friend') // Todo: Add pagination

@@ -53,8 +53,8 @@ export class FriendService {
   async checkFriendshipDuplication(
     first_user_id: number,
     second_user_id: number,
-  ): Promise<Friend[]> {
-    return await this.friendsRepository.find({
+  ): Promise<Friend> {
+    return await this.friendsRepository.findOne({
       where: [
         { requesterUserId: first_user_id, responderUserId: second_user_id },
         { requesterUserId: second_user_id, responderUserId: first_user_id },
