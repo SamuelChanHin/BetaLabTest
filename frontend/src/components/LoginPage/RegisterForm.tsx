@@ -25,14 +25,13 @@ function RegisterForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterData>();
-  console.log(profileImageFile);
+
   const onSubmit = async (data: any) => {
     try {
       const formData = convertObjectToFormData(data);
       if (profileImageFile) {
         formData.append("image", profileImageFile);
       }
-
       await createUserApi(formData as any as User);
       toast.success("Successfully create new user");
       refreshPage();

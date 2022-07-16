@@ -14,6 +14,8 @@ interface UserCardProps {
 function UserCard({ user, onClick, bottomRightComponent }: UserCardProps) {
   return (
     <StackContainer
+      spacing={1}
+      alignItems="center"
       direction="row"
       onClick={() => {
         onClick(user.id);
@@ -39,9 +41,9 @@ function UserCard({ user, onClick, bottomRightComponent }: UserCardProps) {
 export default UserCard;
 
 const StackContainer = styled(Stack)`
+  padding: 12px 8px;
   position: relative;
   cursor: pointer;
-  padding: 30px;
   border: solid 1px ${(props) => props.theme.palette.grey[400]};
   border-radius: 8px;
 
@@ -52,6 +54,6 @@ const StackContainer = styled(Stack)`
 
 const StyledBottomRightBox = styled(Box)`
   position: absolute;
-  right: 4px;
-  bottom: 4px;
+  right: 8px;
+  bottom: 0px;
 `;

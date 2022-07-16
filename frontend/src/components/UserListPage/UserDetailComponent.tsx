@@ -42,7 +42,7 @@ function UserDetailComponent({ user, refetch }: UserDetailComponentProps) {
   if (!loginUser) return null;
 
   return (
-    <StackContainer>
+    <StackContainer spacing={1}>
       <AvatarImageUpload
         defaultImageUrl={
           profileImage?.path && config.baseUrl + "/" + profileImage?.path
@@ -71,7 +71,7 @@ function UserDetailComponent({ user, refetch }: UserDetailComponentProps) {
 export default UserDetailComponent;
 
 const StackContainer = styled(Stack)`
-  padding: 30px;
+  padding: 16px 24px;
   border: solid 1px ${(props) => props.theme.palette.grey[400]};
   border-radius: 8px;
 `;

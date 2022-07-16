@@ -28,6 +28,21 @@ function AvatarImageUpload({
     };
   };
 
+  React.useEffect(() => {
+    if (imageUrl && setImageFile) {
+      if (
+        !inputFile ||
+        !inputFile.current ||
+        !inputFile.current.files ||
+        inputFile.current.files.length === 0
+      ) {
+        return;
+      }
+
+      setImageFile(inputFile.current.files[0]);
+    }
+  }, [imageUrl]);
+
   return (
     <>
       <input
