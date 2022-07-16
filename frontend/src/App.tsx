@@ -10,6 +10,7 @@ import UserProfilePage from "./pages/UserProfilePage";
 import FriendListPage from "./pages/FriendListPage";
 import LoginPage from "./pages/LoginPage";
 import { useAuth } from "./provider/AuthProvider";
+import AppLayout from "./components/Layout/AppLayout";
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -27,12 +28,14 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/users/*" element={<UserListPage />} />
-        <Route path="/user/:userId/*" element={<UserProfilePage />} />
-        <Route path="/friends/*" element={<FriendListPage />} />
-        <Route path="*" element={<Navigate to="/users" />} />
-      </Routes>
+      <AppLayout>
+        <Routes>
+          <Route path="/users/*" element={<UserListPage />} />
+          <Route path="/user/:userId/*" element={<UserProfilePage />} />
+          <Route path="/friends/*" element={<FriendListPage />} />
+          <Route path="*" element={<Navigate to="/users" />} />
+        </Routes>
+      </AppLayout>
     </Router>
   );
 }
