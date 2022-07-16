@@ -18,6 +18,7 @@ interface Image {
   path: string;
   size: number;
 }
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
