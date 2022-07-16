@@ -1,7 +1,8 @@
-import { Stack, styled } from "@mui/material";
+import { Stack, styled, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "../../types/userType";
+import { dataFormatConvertor } from "../../util/dateFormatter";
 import UserCard from "./component/UserCard";
 
 interface UserListComponentProps {
@@ -17,9 +18,22 @@ function UserListComponent({ users }: UserListComponentProps) {
 
   return (
     <StackContainer spacing={1}>
-      {users.map((user) => (
-        <UserCard onClick={userCardOnClick} user={user} />
-      ))}
+      {users.map((user) => {
+        const DateComponent = () => {
+          return (
+            <Typography>
+              Updated at: {dataFormatConvertor(user.updatedAt)}
+            </Typography>
+          );
+        };
+        return (
+          <UserCard
+            onClick={userCardOnClick}
+            user={user}
+            bottomRightComponent={<DateComponent />}
+          />
+        );
+      })}
     </StackContainer>
   );
 }

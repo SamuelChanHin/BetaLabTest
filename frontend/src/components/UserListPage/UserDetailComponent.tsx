@@ -20,15 +20,15 @@ interface UserDetailComponentProps {
 }
 
 function UserDetailComponent({ user, refetch }: UserDetailComponentProps) {
-  const { user: clientUser } = useAuth(); // clientUser is login user
+  const { user: loginUser } = useAuth();
   const { email, name, phone, address, companyName, profileImage, friend } =
     user; // user is viewing user
   const isAlreadyFriend = Boolean(friend);
 
   const addFriend = async () => {
-    if (!clientUser) return;
+    if (!loginUser) return;
     try {
-      await addFriendApi(clientUser?.id, {
+      await addFriendApi(loginUser?.id, {
         responderUserId: user.id,
       });
       toast.success("Successfully add new friend");
@@ -39,7 +39,7 @@ function UserDetailComponent({ user, refetch }: UserDetailComponentProps) {
     }
   };
 
-  if (!clientUser) return null;
+  if (!loginUser) return null;
 
   return (
     <StackContainer>
@@ -55,7 +55,7 @@ function UserDetailComponent({ user, refetch }: UserDetailComponentProps) {
       <Typography>address: {address}</Typography>
       <Typography>company name: {companyName}</Typography>
 
-      {user.id !== clientUser.id && ( // user.id === clientUser.id mean the login user viewing own profile
+      {user.id !== loginUser.id && ( // user.id === loginUser.id mean the login user viewing own profile
         <Button
           variant="contained"
           disabled={isAlreadyFriend}

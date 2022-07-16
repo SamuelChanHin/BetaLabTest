@@ -34,6 +34,8 @@ export interface Friend {
   id: number;
   requesterUserId: number;
   responderUserId: number;
+  requesterUser: User;
+  responderUser: User;
   status: FriendStatus;
   isActive: boolean;
   createdAt: Date;
