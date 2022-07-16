@@ -21,6 +21,21 @@ export interface User {
   isVerified: boolean;
   createdAt: Date;
   updatedAt: Date;
+  friend?: Friend;
 }
 
-export interface Friend {}
+export enum FriendStatus {
+  ACCEPTED = "accepted",
+  REJECTED = "rejected",
+  PENDING = "pending",
+}
+
+export interface Friend {
+  id: number;
+  requesterUserId: number;
+  responderUserId: number;
+  status: FriendStatus;
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
