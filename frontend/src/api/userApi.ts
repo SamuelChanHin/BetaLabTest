@@ -1,20 +1,20 @@
 import { apiClient } from "../config/apiClient";
 import { User } from "../types/userType";
 
-export const getAllUsersApi = async () => {
-  await apiClient.get("/user");
+export const getAllUsersApi = async (): Promise<User[]> => {
+  return await apiClient.get("/user");
 };
 
 export const getOneUserApi = async (userId: number) => {
-  await apiClient.get(`/user/${userId}`);
+  return await apiClient.get(`/user/${userId}`);
 };
 
 export const getAllFriendsApi = async (userId: number) => {
-  await apiClient.get(`/user/${userId}/friend`);
+  return await apiClient.get(`/user/${userId}/friend`);
 };
 
 export const createUserApi = async (data: User) => {
-  await apiClient.post("/user", data);
+  return await apiClient.post("/user", data);
 };
 
 export const addFriendApi = async (
@@ -23,5 +23,5 @@ export const addFriendApi = async (
     responderUserId: number;
   }
 ) => {
-  await apiClient.post(`/user/${requesterUserId}/friend`, data);
+  return await apiClient.post(`/user/${requesterUserId}/friend`, data);
 };
