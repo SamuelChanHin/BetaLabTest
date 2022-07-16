@@ -12,8 +12,6 @@ function LoginPage() {
 
   return (
     <StackContainer spacing={2} alignItems="center">
-      <Typography variant="h1">Login Page</Typography>
-
       {isRegisterForm ? <RegisterForm /> : <LoginForm />}
       <Button variant="text" onClick={formSwitcher}>
         {isRegisterForm ? "Already have an account?" : "Create an account?"}
