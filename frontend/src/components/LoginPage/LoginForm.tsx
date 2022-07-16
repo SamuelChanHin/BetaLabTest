@@ -13,7 +13,7 @@ interface LoginData {
 }
 
 function LoginForm() {
-  const { setIsAuthenticated } = useAuth();
+  const { setIsAuthenticated, setUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -23,6 +23,7 @@ function LoginForm() {
   const onSubmit = async (data: LoginData) => {
     try {
       const res = await loginApi(data);
+      setUser(res);
       setAccessToken(res.access_token);
       setIsAuthenticated(true);
       toast.success("login success");
