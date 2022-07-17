@@ -1,4 +1,4 @@
-import { Box, Button, Stack, styled } from "@mui/material";
+import { Box, Button, Stack, styled, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../provider/AuthProvider";
@@ -6,7 +6,7 @@ import { NavItems } from "./const";
 
 export function Header() {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   return (
     <Stack direction="row" justifyContent="space-between">
@@ -25,6 +25,11 @@ export function Header() {
             </Button>
           );
         })}
+        <Box>
+          <Typography variant="h6">
+            Welcome {user?.name || user?.email} !
+          </Typography>
+        </Box>
       </Box>
 
       <LogoutButton color="error" variant="contained" onClick={logout}>
