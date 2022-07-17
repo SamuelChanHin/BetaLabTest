@@ -46,7 +46,7 @@ function LoginForm() {
           })}
         />
         <Typography variant="body2" style={{ color: "red" }}>
-          {errors.email && "email is required"}
+          {errors.email && errors.email.message}
         </Typography>
 
         <TextField
@@ -58,7 +58,7 @@ function LoginForm() {
           })}
         />
         <Typography variant="body2" style={{ color: "red" }}>
-          {errors.password && "password is required"}
+          {errors.password && errors.password.message}
         </Typography>
 
         <Button type="submit" variant="contained">

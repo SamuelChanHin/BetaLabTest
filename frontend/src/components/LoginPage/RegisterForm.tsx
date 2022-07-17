@@ -8,6 +8,7 @@ import { handleEmailValidation } from "../../util/dataValidator";
 import AvatarImageUpload from "../Common/AvatarImageUpload";
 import { toast } from "react-toastify";
 import { refreshPage } from "../../util/window";
+import useRenderCounter from "../../hook/useRenderCounter";
 
 interface RegisterData {
   email: string;
@@ -19,6 +20,7 @@ interface RegisterData {
 }
 
 function RegisterForm() {
+  const { renderCount } = useRenderCounter();
   const [profileImageFile, setProfileImageFile] = React.useState(null);
   const {
     register,
@@ -95,6 +97,7 @@ function RegisterForm() {
         <Button type="submit" variant="contained">
           Signup
         </Button>
+        <Typography>Render Count: {renderCount}</Typography>
       </Stack>
     </form>
   );

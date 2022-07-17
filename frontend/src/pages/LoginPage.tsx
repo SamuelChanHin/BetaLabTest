@@ -23,6 +23,7 @@ function LoginPage() {
 export default LoginPage;
 
 const StackContainer = styled(Stack)`
+  padding: 16px 0px;
   width: 100%;
 
   form {
