@@ -1,8 +1,8 @@
 export const configuration = () => ({
-  DATABASE_HOST: process.env.DATABASE_HOST || 'localhost',
-  DATABASE_USERNAME: process.env.DATABASE_USERNAME || 'postgres',
-  DATABASE_PASSWORD: process.env.DATABASE_PASSWORD || 'postgres',
-  DATABASE_DATABASE: process.env.DATABASE_DATABASE,
-  DATABASE_PORT: process.env.DATABASE_PORT || 5432,
+  DATABASE_HOST: process.env.POSTGRES_HOST || 'localhost',
+  DATABASE_USERNAME: process.env.POSTGRES_USER || 'postgres',
+  DATABASE_PASSWORD: process.env.POSTGRES_PASSWORD || 'postgres',
+  DATABASE_DATABASE: process.env.POSTGRES_DB,
+  DATABASE_PORT: process.env.POSTGRES_PORT || 5432,
   PORT: parseInt(process.env.PORT) || 3000,
 });
