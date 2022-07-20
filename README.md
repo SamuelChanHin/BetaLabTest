@@ -29,3 +29,14 @@ docker-compose up -d
 # DrawSQL
 
 https://drawsql.app/personaldevelopment/diagrams/betalab-testing
+
+# Server API
+
+| METHOD | ROUTE                 | Auth Strategy |
+| ------ | --------------------- | ------------- |
+| POST   | /token/validate       | No            |
+| POST   | /login                | Local         |
+| GET    | /user/:user_id        | JWT           |
+| GET    | /user/:user_id/friend | JWT           |
+| POST   | /user                 | JWT           |
+| POST   | /user/:user_id/friend | JWT           |
