@@ -29,13 +29,3 @@ docker-compose up -d
 # DrawSQL
 
 https://drawsql.app/personaldevelopment/diagrams/betalab-testing
-
-# Docker Common Command
-
-```bash
-docker rm -f $(docker ps -a -q)
-docker images
-docker ps -a
-docker logs -f <CONTAINER_ID>
-docker-compose up -d
-```
